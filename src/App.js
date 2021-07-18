@@ -81,6 +81,7 @@ function App() {
       updatedTasks.unshift({ name: newTask, status: 'in-progress', id: Math.random().toString() });
       return updatedTasks;
     });
+    setAddItemShown(false);
   };
 
   const deleteTaskHandler = (taskId) => {
