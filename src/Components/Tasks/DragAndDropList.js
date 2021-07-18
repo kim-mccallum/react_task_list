@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
+import Button from "../UI/Button/Button";
 import "./DragAndDropList.css";
 
 
@@ -16,10 +18,10 @@ const DragAndDropList = (props) => {
     updateToDoItems(items);
   };
 
-  //delete task hanlder
-  const handleDeleteTask = (id) => {
-    props.onDeleteTask(id)
-  }
+  const deleteHandler = (id) => {
+    console.log(id)
+    // props.onDelete(props.id);
+  };
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -43,7 +45,7 @@ const DragAndDropList = (props) => {
                         <img src={thumb} alt={`${name} Thumb`} />
                       </div>
                       <p>{name}</p>
-                      <button onClick={handleDeleteTask}>TEST</button>
+                      <Button onClick={deleteHandler}>TEST</Button>
                     </li>
                   )}
                 </Draggable>

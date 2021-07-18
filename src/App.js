@@ -10,26 +10,31 @@ const TODOS = [
   {
     id: "1",
     name: "Feed the Boots",
+    status: 'complete',
     thumb: "/images/check.png",
   },
   {
     id: "2",
     name: "Feed the Boots more treats",
+    status: 'in-progress',
     thumb: "/images/star.png",
   },
   {
     id: "3",
     name: "Buy the Boots more toys",
+    status: 'in-progress',
     thumb: "/images/star.png",
   },
   {
     id: "4",
     name: "Stretch",
+    status: 'complete',
     thumb: "/images/check.png",
   },
   {
     id: "5",
     name: "Stretch some more",
+    status: 'in-progress',
     thumb: "/images/star.png",
   },
 ];
@@ -68,14 +73,24 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  //This isn't properly triggering a rerender - why not? 
   const addTaskHandler = (newTask) => {
-    console.log(newTask);
     //use prevState and spread to add new task
+    setTasks(prevTasks => {
+      const updatedTasks = [...prevTasks];
+      updatedTasks.unshift({ name: newTask, status: 'in-progress', id: Math.random().toString() });
+      return updatedTasks;
+    });
   };
 
-  const deleteTaskHandler = (id) => {
-    console.log(`deleting task with id: ${id}`)
+  const deleteTaskHandler = (taskId) => {
+    console.log(`deleting task with id: ${taskId}`)
+    setTasks(prevTasks => {
+      const updatedTasks = prevTasks.filter(task => task.id !== taskId);
+      return updatedTasks;
+    });
   }
+
 
   return (
     <React.Fragment>
