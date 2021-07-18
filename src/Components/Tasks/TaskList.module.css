@@ -1,0 +1,32 @@
+.task {
+    width: 70%;
+    max-width: 40rem;
+    padding: 1.5rem;
+    margin: 1rem auto;
+    text-align: left;
+  }
+
+.task h2{
+  display: inline;
+}
+
+  .button {
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    background-color: #c1ccb3;
+    color: white;
+    /* padding: 0.75rem; */
+    margin: 0.75rem;
+    /* display: flex;
+    justify-content: space-around;
+    align-items: center; */
+    display: inline;
+    border-radius: 5px;
+  }
+
+  .icon {
+    width: 5rem;
+    height: 5rem;
+    margin-right: 0.5rem;
+  }

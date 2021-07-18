@@ -1,60 +1,52 @@
-import { useState, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 
-import DragAndDropList from "./Components/DragAndDropList";
-import Header from "./Components/Layout/Header";
-import Menu from './Components/Layout/Menu';
-import Card from './Components/UI/Card/Card';
-
-// The list:
-const TODOS = [
-  {
-    id: "1",
-    name: "Feed the Boots",
-    thumb: "/images/check.png",
-  },
-  {
-    id: "2",
-    name: "Feed the Boots more treats",
-    thumb: "/images/star.png",
-  },
-  {
-    id: "3",
-    name: "Buy the Boots more toys",
-    thumb: "/images/star.png",
-  },
-  {
-    id: "4",
-    name: "Stretch",
-    thumb: "/images/check.png",
-  },
-  {
-    id: "5",
-    name: "Stretch some more",
-    thumb: "/images/star.png",
-  },
-];
+import Login from "./components/Login/Login";
+import Home from "./components/Home/Home";
+import MainHeader from "./components/MainHeader/MainHeader";
+import AddTaskForm from "./components/Tasks/AddTaskForm";
 
 function App() {
-  const [ menuShown, setMenuShown ] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [addItemShown, setAddItemShown] = useState(true);
 
-  const showMenuHandler = () => {
-    setMenuShown(true);
+  const showAddItemHandler = () => {
+    setAddItemShown(true);
   };
 
-  const hideMenuHandler = () => {
-    setMenuShown(false);
+  const hideAddItemHandler = () => {
+    setAddItemShown(false);
+  };
+
+  //prevent infinite loop by putting the state update into useEffect
+  useEffect(() => {
+    const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
+
+    if (storedUserLoggedInInformation === "1") {
+      setIsLoggedIn(true);
+    }
+  }, []); //an empty array of dependencies means they won't change and then this only runs once
+
+  const loginHandler = (email, password) => {
+    // We should of course check email and password
+    // But it's just a dummy/ demo anyways
+    localStorage.setItem("isLoggedIn", "1");
+    setIsLoggedIn(true);
+  };
+
+  const logoutHandler = () => {
+    localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
   };
 
   return (
-    <Fragment>
-      <Header onShowMenu={showMenuHandler}/>
-      {menuShown && <Menu onHideMenu={hideMenuHandler} />}
+    <React.Fragment>
+      {addItemShown && <AddTaskForm onClose={hideAddItemHandler}/>}
+      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} onAddItem={showAddItemHandler}/>
       <main>
-        <Card>
-          <DragAndDropList toDoList={TODOS}/>
-        </Card>
-      </main>      
-    </Fragment>
+        {!isLoggedIn && <Login onLogin={loginHandler} />}
+        {isLoggedIn && <Home onLogout={logoutHandler} />}
+      </main>
+    </React.Fragment>
   );
 }
 

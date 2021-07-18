@@ -2,8 +2,37 @@ import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./DragAndDropList.css";
 
+// The list:
+const TODOS = [
+  {
+    id: "1",
+    name: "Feed the Boots",
+    thumb: "/images/check.png",
+  },
+  {
+    id: "2",
+    name: "Feed the Boots more treats",
+    thumb: "/images/star.png",
+  },
+  {
+    id: "3",
+    name: "Buy the Boots more toys",
+    thumb: "/images/star.png",
+  },
+  {
+    id: "4",
+    name: "Stretch",
+    thumb: "/images/check.png",
+  },
+  {
+    id: "5",
+    name: "Stretch some more",
+    thumb: "/images/star.png",
+  },
+];
+
 const DragAndDropList = (props) => {
-  const [toDoItems, updateToDoItems] = useState(props.toDoList);
+  const [toDoItems, updateToDoItems] = useState(TODOS);
 
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
