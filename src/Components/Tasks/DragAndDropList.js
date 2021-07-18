@@ -44,10 +44,12 @@ const DragAndDropList = (props) => {
                       <Button onClick={() => deleteHandler(id)}>Delete</Button>
                     </li>
                   )}
+                  
                 </Draggable>
               );
             })}
-          </ul>
+            {provided.placeholder}
+          </ul> 
         )}
       </Droppable>
     </DragDropContext>
