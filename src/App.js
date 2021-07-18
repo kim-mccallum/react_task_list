@@ -5,9 +5,39 @@ import Home from "./components/Home/Home";
 import MainHeader from "./components/MainHeader/MainHeader";
 import AddTaskForm from "./components/Tasks/AddTaskForm";
 
+// The list:
+const TODOS = [
+  {
+    id: "1",
+    name: "Feed the Boots",
+    thumb: "/images/check.png",
+  },
+  {
+    id: "2",
+    name: "Feed the Boots more treats",
+    thumb: "/images/star.png",
+  },
+  {
+    id: "3",
+    name: "Buy the Boots more toys",
+    thumb: "/images/star.png",
+  },
+  {
+    id: "4",
+    name: "Stretch",
+    thumb: "/images/check.png",
+  },
+  {
+    id: "5",
+    name: "Stretch some more",
+    thumb: "/images/star.png",
+  },
+];
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [addItemShown, setAddItemShown] = useState(true);
+  const [tasks, setTasks] = useState(TODOS);
+  const [addItemShown, setAddItemShown] = useState(false);
 
   const showAddItemHandler = () => {
     setAddItemShown(true);
@@ -38,13 +68,22 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  const addTaskHandler = (newTask) => {
+    console.log(newTask);
+    //use prevState and spread to add new task
+  };
+
+  const deleteTaskHandler = (id) => {
+    console.log(`deleting task with id: ${id}`)
+  }
+
   return (
     <React.Fragment>
-      {addItemShown && <AddTaskForm onClose={hideAddItemHandler}/>}
+      {addItemShown && <AddTaskForm onAddTask={addTaskHandler} onClose={hideAddItemHandler}/>}
       <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} onAddItem={showAddItemHandler}/>
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
-        {isLoggedIn && <Home onLogout={logoutHandler} />}
+        {isLoggedIn && <Home onLogout={logoutHandler} toDoList={tasks} onDeleteTask={deleteTaskHandler}/>}
       </main>
     </React.Fragment>
   );

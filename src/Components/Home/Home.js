@@ -10,7 +10,7 @@ const Home = (props) => {
     <Card className={classes.home}>
       <h1>Task List</h1>
       {/* <TaskList /> */}
-      <DragAndDropList />
+      <DragAndDropList toDoList={props.toDoList} onDeleteTask={props.onDeleteTask}/>
     </Card>
   );
 };
