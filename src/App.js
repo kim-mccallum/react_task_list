@@ -91,7 +91,6 @@ function App() {
     });
   }
 
-
   return (
     <React.Fragment>
       {addItemShown && <AddTaskForm onAddTask={addTaskHandler} onClose={hideAddItemHandler}/>}

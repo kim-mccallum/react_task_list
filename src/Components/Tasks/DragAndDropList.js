@@ -19,33 +19,29 @@ const DragAndDropList = (props) => {
   };
 
   const deleteHandler = (id) => {
-    console.log(id)
-    // props.onDelete(props.id);
+    props.onDeleteTask(id);
   };
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Droppable droppableId="characters">
+      <Droppable droppableId="tasks">
         {(provided) => (
           <ul
             className="items"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {toDoItems.map(({ id, name, thumb }, index) => {
+            {toDoItems.map(({ id, name }, index) => {
               return (
-                <Draggable key={id} draggableId={id} index={index}>
+                <Draggable key={id} draggableId={id} index={index} >
                   {(provided) => (
                     <li
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <div className="items-thumb">
-                        <img src={thumb} alt={`${name} Thumb`} />
-                      </div>
                       <p>{name}</p>
-                      <Button onClick={deleteHandler}>TEST</Button>
+                      <Button onClick={() => deleteHandler(id)}>Delete</Button>
                     </li>
                   )}
                 </Draggable>
