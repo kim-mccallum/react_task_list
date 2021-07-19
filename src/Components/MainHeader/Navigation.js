@@ -8,12 +8,7 @@ const Navigation = (props) => {
   return (
     <nav className={classes.nav}>
       <ul>
-        {props.isLoggedIn && (
-          <li>
-            {/* <button onClick={props.onAddItem}>Add Item</button> */}
-            <Button onClick={props.onAddItem}>Add Item</Button>
-          </li>
-        )}
+
         {props.isLoggedIn && (
           <li>
             <Button onClick={props.onLogout}>Logout</Button>

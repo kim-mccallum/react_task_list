@@ -10,7 +10,6 @@ const MainHeader = (props) => {
       <Navigation
         isLoggedIn={props.isAuthenticated}
         onLogout={props.onLogout}
-        onAddItem={props.onAddItem}
       />
     </header>
   );

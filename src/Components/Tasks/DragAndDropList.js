@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import Button from "../UI/Button/Button";
-import "./DragAndDropList.css";
+// import "./DragAndDropList.css";
 //move to list
 import AddTaskForm from '../Tasks/AddTaskForm';
+
+import classes from './DragAndDropList.module.css'
 
 // The list:
 const TODOS = [
@@ -89,11 +91,11 @@ const DragAndDropList = (props) => {
       <Droppable droppableId="tasks">
         {(provided) => (
           <ul
-            className="items"
+            className={classes.items}
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {tasks.map(({ id, name }, index) => {
+            {tasks.map(({ id, name, status }, index) => {
               return (
                 <Draggable key={id} draggableId={id} index={index} >
                   {(provided) => (
@@ -102,8 +104,7 @@ const DragAndDropList = (props) => {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <p>{name}</p>
-                      <p>{`id: ${id}`}</p>
+                      <p className={status==='complete' && classes.complete}>{name}</p>
                       <Button onClick={() => deleteTaskHandler(id)}>Delete</Button>
                     </li>
                   )}
@@ -121,8 +122,9 @@ const DragAndDropList = (props) => {
 
   return (
     <React.Fragment>
-    {addItemShown && <AddTaskForm onAddTask={addTaskHandler} onClose={hideAddItemHandler}/>}
-    {content}
+      <Button onClick={showAddItemHandler}>Add Item</Button>
+      {addItemShown && <AddTaskForm onAddTask={addTaskHandler} onClose={hideAddItemHandler}/>}
+      {content}
     </React.Fragment>
   );
 };
