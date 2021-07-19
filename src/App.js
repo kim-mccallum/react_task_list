@@ -10,32 +10,27 @@ const TODOS = [
   {
     id: "1",
     name: "Feed the Boots",
-    status: 'complete',
-    thumb: "/images/check.png",
+    status: 'complete'
   },
   {
     id: "2",
     name: "Feed the Boots more treats",
-    status: 'in-progress',
-    thumb: "/images/star.png",
+    status: 'in-progress'
   },
   {
     id: "3",
     name: "Buy the Boots more toys",
-    status: 'in-progress',
-    thumb: "/images/star.png",
+    status: 'in-progress'
   },
   {
     id: "4",
     name: "Stretch",
-    status: 'complete',
-    thumb: "/images/check.png",
+    status: 'complete'
   },
   {
     id: "5",
     name: "Stretch some more",
-    status: 'in-progress',
-    thumb: "/images/star.png",
+    status: 'in-progress'
   },
 ];
 
@@ -85,12 +80,15 @@ function App() {
   };
 
   const deleteTaskHandler = (taskId) => {
+    //looks correct
     console.log(`deleting task with id: ${taskId}`)
     setTasks(prevTasks => {
       const updatedTasks = prevTasks.filter(task => task.id !== taskId);
       return updatedTasks;
     });
   }
+  //state is updated 
+  console.log(tasks)
 
   return (
     <React.Fragment>

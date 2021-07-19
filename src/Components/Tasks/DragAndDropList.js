@@ -41,6 +41,7 @@ const DragAndDropList = (props) => {
                       {...provided.dragHandleProps}
                     >
                       <p>{name}</p>
+                      <p>{`id: ${id}`}</p>
                       <Button onClick={() => deleteHandler(id)}>Delete</Button>
                     </li>
                   )}

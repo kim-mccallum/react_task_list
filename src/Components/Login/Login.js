@@ -23,7 +23,7 @@ const Login = (props) => {
     }, 500);
     //cleanup process runs before useEffect runs again and before the component is unmounted
     return () => {
-      console.log("clean up!");
+      // console.log("clean up!");
       clearTimeout(identifier);
     };
   }, [enteredEmail, enteredPassword]); //add what you are using in your side effect function as your dependencies
