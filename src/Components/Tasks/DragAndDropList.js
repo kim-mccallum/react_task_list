@@ -5,6 +5,7 @@ import Button from "../UI/Button/Button";
 // import "./DragAndDropList.css";
 //move to list
 import AddTaskForm from '../Tasks/AddTaskForm';
+import AddTaskButton from '../Tasks/AddTaskButton';
 
 import classes from './DragAndDropList.module.css'
 
@@ -104,7 +105,7 @@ const DragAndDropList = (props) => {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <p className={status==='complete' && classes.complete}>{name}</p>
+                      <p className={status==='complete' ? classes.complete : ''}>{name}</p>
                       <Button onClick={() => deleteTaskHandler(id)}>Delete</Button>
                     </li>
                   )}
@@ -122,7 +123,8 @@ const DragAndDropList = (props) => {
 
   return (
     <React.Fragment>
-      <Button onClick={showAddItemHandler}>Add Item</Button>
+      <AddTaskButton onAddItem={showAddItemHandler}/>
+      {/* <Button onClick={showAddItemHandler}>Add Item</Button> */}
       {addItemShown && <AddTaskForm onAddTask={addTaskHandler} onClose={hideAddItemHandler}/>}
       {content}
     </React.Fragment>

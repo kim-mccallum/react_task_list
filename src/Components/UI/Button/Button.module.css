@@ -4,11 +4,16 @@
   background: #e63200;
   color: white;
   padding: 0.75rem 3.5rem;
+  margin: 0.75rem;
   cursor: pointer;
   font-size: 1.15rem;
   border-radius: 30px;
 }
 
+.test{
+  border: 1px solid black;
+  background-color: gray;
+}
 .button:hover,
 .button:active {
   background: #e63200;
@@ -28,3 +33,5 @@ button:active:disabled {
   color: #666666;
   cursor: not-allowed;
 }
+
+

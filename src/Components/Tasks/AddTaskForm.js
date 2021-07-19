@@ -27,7 +27,7 @@ const AddTaskForm = props => {
 
     return (
         <Modal>
-            <button onClick={props.onClose}>Close</button>
+            {/* <button onClick={props.onClose}>Close</button> */}
             
             <form onSubmit={formSubmitHandler}>
             <div
@@ -36,6 +36,7 @@ const AddTaskForm = props => {
                 <label>New Task Item</label>
                 <input type="text" onChange={taskInputChangeHandler} />
             </div>
+            <Button onClick={props.onClose} className='test'>Cancel</Button>
             <Button type="submit">Add Task</Button>
             </form>
         </Modal>
