@@ -14,27 +14,27 @@ const TODOS = [
   {
     id: "1",
     name: "Feed the Boots",
-    status: 'complete'
+    complete: true
   },
   {
     id: "2",
     name: "Feed the Boots more treats",
-    status: 'in-progress'
+    complete: false
   },
   {
     id: "3",
     name: "Buy the Boots more toys",
-    status: 'in-progress'
+    complete: false
   },
   {
     id: "4",
     name: "Stretch",
-    status: 'complete'
+    complete: true
   },
   {
     id: "5",
     name: "Stretch some more",
-    status: 'in-progress'
+    complete: false
   },
 ];
 
@@ -56,7 +56,7 @@ const DragAndDropList = (props) => {
       //use prevState and spread to add new task
       setTasks(prevTasks => {
         const updatedTasks = [...prevTasks];
-        updatedTasks.unshift({ name: newTask, status: 'in-progress', id: Math.random().toString() });
+        updatedTasks.unshift({ name: newTask, complete: false, id: Math.random().toString() });
         return updatedTasks;
       });
       setAddItemShown(false);
@@ -69,6 +69,19 @@ const DragAndDropList = (props) => {
         const updatedTasks = prevTasks.filter(task => task.id !== taskId);
         return updatedTasks;
       });
+    }
+
+    const completeTaskHandler = (taskId) => {
+      console.log(`completing task: ${taskId}`);
+      setTasks(prevTasks => {
+        // find the task with the id
+        const index = prevTasks.findIndex(item => item.id === taskId);
+        // toggle complete
+        prevTasks[index].complete = !prevTasks[index].complete
+        const updatedTasks = prevTasks;
+        console.log(updatedTasks);
+        return updatedTasks
+      })
     }
 
   const handleOnDragEnd = (result) => {
@@ -96,7 +109,7 @@ const DragAndDropList = (props) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {tasks.map(({ id, name, status }, index) => {
+            {tasks.map(({ id, name, complete }, index) => {
               return (
                 <Draggable key={id} draggableId={id} index={index} >
                   {(provided) => (
@@ -105,7 +118,8 @@ const DragAndDropList = (props) => {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <p className={status==='complete' ? classes.complete : ''}>{name}</p>
+                      <p className={complete ? classes.complete : ''}>{name}</p>
+                      <Button onClick={() =>completeTaskHandler(id)}>Complete</Button>
                       <Button onClick={() => deleteTaskHandler(id)}>Delete</Button>
                     </li>
                   )}
