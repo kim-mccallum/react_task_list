@@ -72,14 +72,13 @@ const DragAndDropList = (props) => {
     }
 
     const completeTaskHandler = (taskId) => {
-      console.log(`completing task: ${taskId}`);
       setTasks(prevTasks => {
-        // find the task with the id
+        // find the task with the id and toggle the value
         const index = prevTasks.findIndex(item => item.id === taskId);
-        // toggle complete
-        prevTasks[index].complete = !prevTasks[index].complete
-        const updatedTasks = prevTasks;
-        console.log(updatedTasks);
+        // Create a copy
+        const updatedTasks = [...prevTasks]
+        // Update the value
+        updatedTasks[index] = {...updatedTasks[index], complete: !updatedTasks[index].complete}
         return updatedTasks
       })
     }
@@ -119,7 +118,7 @@ const DragAndDropList = (props) => {
                       {...provided.dragHandleProps}
                     >
                       <p className={complete ? classes.complete : ''}>{name}</p>
-                      <Button onClick={() =>completeTaskHandler(id)}>Complete</Button>
+                      <Button onClick={() => completeTaskHandler(id)}>Complete</Button>
                       <Button onClick={() => deleteTaskHandler(id)}>Delete</Button>
                     </li>
                   )}
